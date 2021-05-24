@@ -2,6 +2,8 @@ import { useState } from 'react';
 import {createUseStyles} from 'react-jss';
 import addCommas from '../utils/addCommas';
 import stripCommas from '../utils/stripCommas';
+import calculateTermRemaining from '../utils/calculateTermRemaining';
+import formatAmount from '../utils/formatAmount';
 import InvestButton from './InvestButton';
 
 const useStyles = createUseStyles({
@@ -71,8 +73,8 @@ const Invest = ({loan, investFunc, closeFunc}) => {
       <div className={classes.modal}>
         <h1 className={classes.heading}>Invest in Loan</h1>
         <p>{loan.title}</p>
-        <p>Amount available: {loan.available}</p>
-        <p>Loan ends in: {loan.term_remaining}</p>
+        <p>Amount available: £{formatAmount(loan.available)}</p>
+        <p>Loan ends in: {calculateTermRemaining(loan.term_remaining)}</p>
         <p>Investment amount (£)</p>
 
         <form className={classes.form} onSubmit={onInvest}>

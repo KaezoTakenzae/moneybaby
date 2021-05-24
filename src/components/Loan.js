@@ -1,11 +1,15 @@
 import { useState } from 'react';
 import {createUseStyles} from 'react-jss';
+
+import calculateTermRemaining from '../utils/calculateTermRemaining';
+import formatPercentage from '../utils/formatPercentage';
+import formatAmount from '../utils/formatAmount';
+
 import Invest from './Invest';
 import InvestButton from './InvestButton';
 
 const useStyles = createUseStyles({
   root: {
-
     marginBottom: 20,
     margin: '0 auto',
     background: 'white',
@@ -44,11 +48,12 @@ const Loan = ({loan, investFunc}) => {
       <div className={classes.root} onClick={() => setInvesting(true)}>
         <div className={classes.title}>{loan.title}</div>
         <div className={classes.loanDetails}>
-          <p>Amount: {loan.amount}</p>
-          <p>Annualised Return: {loan.annualised_return}</p>
-          <p>Amount available: {loan.available}</p>
-          <p>LTV: {loan.ltv}</p>
-          <p>Term remaining: {loan.term_remaining}</p>
+          <p>Amount: £{formatAmount(loan.amount)}</p>
+          <p>Annualised Return: {formatPercentage(loan.annualised_return)}%</p>
+          <p>Amount available: £{formatAmount(loan.available)}</p>
+          <p>LTV: {formatPercentage(loan.ltv)}%</p>
+          <p>Loan ends in: {calculateTermRemaining(loan.term_remaining)}</p>
+          <p>Tranche: {loan.tranche}</p>
         </div>
         <div className={classes.btnContainer}>
           <InvestButton onClick={() => setInvesting(true)} />

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import {createUseStyles} from 'react-jss';
 import addCommas from '../utils/addCommas';
 import stripCommas from '../utils/stripCommas';
+import formatAmount from '../utils/formatAmount';
 
 import Loan from './Loan';
 
@@ -54,7 +55,7 @@ const Loans = ({ data }) => {
         <Loan key={i} loan={loan} investFunc={invest} />
       ))}
       <div className={classes.totalAvailable}>
-        Total amount available for investments: £{addCommas(totalAmountAvailable)}
+        Total amount available for investments: £{formatAmount(addCommas(totalAmountAvailable))}
       </div>
     </div>
   );
